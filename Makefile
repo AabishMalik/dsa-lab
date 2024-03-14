@@ -13,7 +13,7 @@ OPTIMIZATION_FLAGS := -march=x86-64 -mtune=native -O0 -g3 -ggdb3
 CFLAGS := $(FLAG_BASE) $(OPTIMIZATION_FLAGS) $(LINKER_FLAGS)
 
 
-.PHONY: bins asm setup  clean
+.PHONY: bins setup  clean
 bins: setup $(BINS)
 	@echo "generated"
 
