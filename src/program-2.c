@@ -7,63 +7,71 @@
 int *stack = NULL;
 static size_t size = 0;
 
-#define is_empty() ( size == 0 || stack == NULL )
+#define is_empty() (size == 0 || stack == NULL)
 
-void create(){
+void create()
+{
 	printf("Enter Starting stack size: ");
 	scanf("\n%lu", &size);
 	stack = malloc(sizeof(int) * size);
-	for(size_t i =0; i<size; i++){
+	for (size_t i = 0; i < size; i++) {
 		printf("Element [%lu]: ", i);
 		scanf("\n%d", &stack[i]);
 	}
 }
 
-void push(int val){
-	if(stack == NULL){
+void push(int val)
+{
+	if (stack == NULL) {
 		printf("Stack not initialized...");
 		return;
 	}
 	size++;
 	stack = realloc(stack, sizeof(int) * size);
-	stack[size-1] = val;
+	stack[size - 1] = val;
 }
 
-int pop(){
-	if (is_empty()){
+int pop()
+{
+	if (is_empty()) {
 		return 0;
 	}
-	int ret = stack[size-1];
+	int ret = stack[size - 1];
 	size--;
 	stack = realloc(stack, sizeof(int) * size);
 	return ret;
 }
 
-int peek(){
-	if( is_empty() ){
+int peek()
+{
+	if (is_empty()) {
 		return 0;
 	}
-	return stack[size-1];
+	return stack[size - 1];
 }
 
-
-void show(){
-	if( is_empty()){
+void show()
+{
+	if (is_empty()) {
 		printf("Stack not initialized...\n");
-	}else {
-		for(size_t i = size-1; i>0; i--)
-			printf("%-5s %d\n", i==size-1?">":" ", stack[i]);
-		
-		printf("%-5s %d\n", 0==size-1?">":" ", stack[0]);
+	} else {
+		for (size_t i = size - 1; i > 0; i--)
+			printf("%-5s %d\n", i == size - 1 ? ">" : " ",
+			       stack[i]);
+
+		printf("%-5s %d\n", 0 == size - 1 ? ">" : " ", stack[0]);
 	}
 }
 
-void flush_stdin(){
+void flush_stdin()
+{
 	int c;
-	while( (c=getchar()) != '\n' && c != EOF );
+	while ((c = getchar()) != '\n' && c != EOF)
+		;
 }
 
-int main(){
+int main()
+{
 	int v;
 	create();
 	printf("Enter value to push: ");

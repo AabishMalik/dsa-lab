@@ -2,7 +2,6 @@
 // Linked list basic implementation
 
 #include <stdio.h>
-#include <stdlib.h>
 #define maxsize 1000
 
 int size; // initialised to 0 because declared globally
