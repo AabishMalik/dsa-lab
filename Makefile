@@ -13,7 +13,7 @@ OPTIMIZATION_FLAGS := -march=x86-64 -mtune=native -O0
 CFLAGS := $(FLAG_BASE) $(OPTIMIZATION_FLAGS) $(LINKER_FLAGS)
 
 
-.PHONY: bins setup  clean format
+.PHONY: bins setup  clean format git-push
 bins: setup $(BINS)
 	@echo "generated"
 
@@ -35,6 +35,13 @@ format: $(SOURCES)
 	do \
 		clang-format -i $$file ; \
 	done
+
+
+git-push: format
+	@echo Adding files
+	git add -A .
+	git commit
+	git push
 
 
 $(BUILD_DIR)/%: $(SOURCE_DIR)/%.c 
