@@ -33,9 +33,7 @@ void push(int val)
 
 int pop()
 {
-		if (is_empty()) {
-				return 0;
-		}
+		if (is_empty()) { return 0; }
 		int ret = stack[size - 1];
 		size--;
 		stack = realloc(stack, sizeof(int) * size);
@@ -44,9 +42,7 @@ int pop()
 
 int peek()
 {
-		if (is_empty()) {
-				return 0;
-		}
+		if (is_empty()) { return 0; }
 		return stack[size - 1];
 }
 

@@ -32,9 +32,7 @@ void Insert(int list[])
 				printf("Enter value to insert : ");
 				scanf("\n%d", &value);
 				if (pos > 0 && pos < size) {
-						for (i = size; i >= pos; i--) {
-								list[i] = list[i - 1];
-						}
+						for (i = size; i >= pos; i--) { list[i] = list[i - 1]; }
 						list[pos - 1] = value;
 						size++;
 						printf("%d is inserted at position %d\n", list[pos - 1], pos);
@@ -51,9 +49,7 @@ void Display(int list[])
 		else {
 				printf("List Elements are : ");
 				int i;
-				for (i = 0; i < size; i++) {
-						printf("%d ", list[i]);
-				}
+				for (i = 0; i < size; i++) { printf("%d ", list[i]); }
 				printf("\n");
 		}
 }
@@ -68,8 +64,7 @@ void Delete(int list[])
 				printf("Enter Position : ");
 				scanf("\n%d", &pos);
 				if (pos > 0 && pos <= size) {
-						for (i = pos - 1; i < size; i++)
-								list[i] = list[i + 1];
+						for (i = pos - 1; i < size; i++) list[i] = list[i + 1];
 						size--;
 						printf("Element Deleted !!!!\n");
 				} else

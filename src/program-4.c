@@ -2,17 +2,14 @@
 // Evaluating Different types of expressions
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 int operand[128], top1 = -1, operator[128], top2 = -1;
 
 int precedence(char op)
 {
-		if (op == '+' || op == '-')
-				return 1;
-		if (op == '*' || op == '/')
-				return 2;
+		if (op == '+' || op == '-') return 1;
+		if (op == '*' || op == '/') return 2;
 		return 0;
 }
 
@@ -40,8 +37,7 @@ void process()
 int evaluateInfixExpression(char *exp)
 {
 		for (int i = 0; exp[i] != '\0'; i++) {
-				while (exp[i] == ' ')
-						i++;
+				while (exp[i] == ' ') i++;
 				char token = exp[i];
 
 				if (token >= '0' && token <= '9') {
@@ -57,9 +53,7 @@ int evaluateInfixExpression(char *exp)
 						operator[++top2] = token;
 
 				} else if (token == ')') {
-						while (operator[top2] != '(') {
-								process();
-						}
+						while (operator[top2] != '(') { process(); }
 						top2--;
 
 				} else if (token == '/' || token == '*' || token == '+' || token == '-') {
@@ -74,15 +68,13 @@ int evaluateInfixExpression(char *exp)
 						}
 				}
 		}
-		while (top2 >= 0) {
-				process();
-		}
+		while (top2 >= 0) { process(); }
 
 		if (top1 == 0 && top2 == -1) {
 				return operand[top1--];
 		} else {
 				printf("Invalid Expression\n");
-				exit(1);
+				return 0;
 		}
 }
 
@@ -97,14 +89,10 @@ int evaluatePostFixExpression(char *exp)
 						int y = operand[top1--];
 						int x = operand[top1--];
 
-						if (token == '+')
-								z = x + y;
-						if (token == '-')
-								z = x - y;
-						if (token == '*')
-								z = x * y;
-						if (token == '/')
-								z = x / y;
+						if (token == '+') z = x + y;
+						if (token == '-') z = x - y;
+						if (token == '*') z = x * y;
+						if (token == '/') z = x / y;
 						operand[++top1] = z;
 				}
 		}
@@ -123,14 +111,10 @@ int evaluatePrefixExpression(char *exp)
 						int x = operand[top1--];
 						int y = operand[top1--];
 
-						if (token == '+')
-								z = x + y;
-						if (token == '-')
-								z = x - y;
-						if (token == '*')
-								z = x * y;
-						if (token == '/')
-								z = x / y;
+						if (token == '+') z = x + y;
+						if (token == '-') z = x - y;
+						if (token == '*') z = x * y;
+						if (token == '/') z = x / y;
 						operand[++top1] = z;
 				}
 		}
