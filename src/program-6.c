@@ -47,32 +47,16 @@ void stdin_flush()
 
 int main()
 {
-		while (1) {
-				char op;
-				printf("Available operations:\n");
-				printf("1. Enqueue\n");
-				printf("2. Dequeue\n");
-				printf("3. Display\n");
-				printf("4. Exit\n");
-
-				printf("Enter operation: ");
-				scanf(" %c", &op);
-
-				if (op == '1') {
-						int data;
-						printf("Enter data: ");
-						scanf("%d", &data);
-						enqueue(data);
-				} else if (op == '2') {
-						int data = dequeue();
-						if (data != -1) { printf("Dequeued data: %d\n", data); }
-				} else if (op == '3') {
-						display();
-				} else if (op == '4') {
-						break;
-				}
-				stdin_flush();
-				printf("Press enter to continue\n");
-				getchar();
-		}
+		int data;
+		printf("Enter the data to be enqueued: ");
+		scanf("%d", &data);
+		enqueue(data);
+		printf("Enter the data to be enqueued: ");
+		scanf("%d", &data);
+		enqueue(data);
+		printf("Dequeued data: %d\n", dequeue());
+		printf("Dequeued data: %d\n", dequeue());
+		printf("Data in the queue: ");
+		display();
+		return 0;
 }
