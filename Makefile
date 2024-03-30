@@ -4,9 +4,9 @@ SOURCES = $(wildcard $(SOURCE_DIR)/*.c)
 BINS = $(patsubst  %.c,%, $(patsubst $(SOURCE_DIR)/%,$(BUILD_DIR)/%, $(SOURCES)))
 
 
-CC := $(CC)
+CC := gcc
 
-FLAG_BASE := -Wall -Werror -std=c17 -pipe
+FLAG_BASE := -std=c17 -pipe
 LINKER_FLAGS := -lm
 OPTIMIZATION_FLAGS := -march=x86-64 -mtune=native -O0
 
@@ -47,6 +47,5 @@ git-push: format
 $(BUILD_DIR)/%: $(SOURCE_DIR)/%.c 
 	@echo CC $@
 	@$(CC) $(CFLAGS) $< -o $@
-
 
 
