@@ -5,8 +5,7 @@
 #define maxsize 1000
 
 int size; // initialised to 0 because declared globally
-void Create(int list[])
-{
+void Create(int list[]) {
 		int i;
 		printf("Enter the size of list : ");
 		scanf("%d", &size);
@@ -21,8 +20,7 @@ void Create(int list[])
 		}
 }
 
-void Insert(int list[])
-{
+void Insert(int list[]) {
 		if (size == 0)
 				printf("List is Empty !!!!\n");
 		else {
@@ -41,8 +39,7 @@ void Insert(int list[])
 		}
 }
 
-void Display(int list[])
-{
+void Display(int list[]) {
 		if (size == 0)
 				printf("List is Empty !!!!\n");
 
@@ -54,8 +51,7 @@ void Display(int list[])
 		}
 }
 
-void Delete(int list[])
-{
+void Delete(int list[]) {
 		if (size == 0)
 				printf("List is Empty !!!!\n");
 
@@ -72,8 +68,7 @@ void Delete(int list[])
 		}
 }
 
-void Search(int list[])
-{
+void Search(int list[]) {
 		if (size == 0)
 				printf("List is Empty !!!!\n");
 		else {
@@ -91,8 +86,7 @@ void Search(int list[])
 		}
 }
 
-int main()
-{
+int main() {
 		int list[maxsize];
 		Create(list);
 		Insert(list);

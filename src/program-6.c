@@ -9,17 +9,14 @@ int queue[MAX];
 int front = -1;
 int rear = -1;
 
-void enqueue(int data)
-{
-		if (rear == MAX - 1) {
+void enqueue(int data) {
+		if (rear == MAX - 1)
 				printf("Queue is full\n");
-				return;
-		}
-		queue[++rear] = data;
+		else
+				queue[++rear] = data;
 }
 
-int dequeue()
-{
+int dequeue() {
 		if (front == rear) {
 				printf("Queue is empty\n");
 				return -1;
@@ -27,26 +24,16 @@ int dequeue()
 		return queue[++front];
 }
 
-int isEmpty()
-{
+int isEmpty() {
 		return front == rear;
 }
 
-void display()
-{
+void display() {
 		for (int i = front + 1; i <= rear; i++) { printf("%d ", queue[i]); }
 		printf("\n");
 }
 
-void stdin_flush()
-{
-		int c;
-		while ((c = getchar()) != '\n' && c != EOF)
-				;
-}
-
-int main()
-{
+int main() {
 		int data;
 		printf("Enter the data to be enqueued: ");
 		scanf("%d", &data);

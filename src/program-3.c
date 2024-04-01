@@ -4,8 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int main()
-{
+int main() {
 		char BUFFER[128], STK[128];
 		printf("Enter expression: ");
 		scanf("\n%[^\n]127s", BUFFER);

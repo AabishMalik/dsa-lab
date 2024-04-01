@@ -1,29 +1,28 @@
 // program 5
-// Conver infix to postfix and postfix to infix
+// Convert infix expressions to prefix and postfix forms and viseversa
 
+#include <ctype.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
-char operators[128], operands[128];
-int top1 = -1, top2 = -1;
+char operators[128];
+int top1 = -1;
 
-int precedence(char c)
-{
+int precedence(char c) {
 		if (c == '*' || c == '/') return 3;
 		if (c == '+' || c == '-') return 1;
 		return -1;
 }
 
-char *InfixToPostfix(char *exp)
-{
+char *InfixToPostfix(char *exp) {
 		int len = strlen(exp);
 		char *res = (char *)malloc(len + 1);
 		int ri = 0;
 
 		for (int i = 0; i < len; i++) {
 				char c = exp[i];
-				if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')) {
+				if (isalnum(c)) {
 						res[ri++] = c;
 
 				} else if (c == '(') {
@@ -45,8 +44,7 @@ char *InfixToPostfix(char *exp)
 		return res;
 }
 
-char *PostFixToInfix(char *exp)
-{
+char *PostFixToInfix(char *exp) {
 		int len = strlen(exp);
 		char *res = (char *)malloc(len + 1);
 		char tmp[128][128] = { 0 };
@@ -54,7 +52,7 @@ char *PostFixToInfix(char *exp)
 
 		for (int i = 0; i < len; i++) {
 				char c = exp[i];
-				if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')) {
+				if (isalnum(c)) {
 						ti++;
 						tmp[ti][0] = c;
 						tmp[ti][1] = '\0';
@@ -70,16 +68,11 @@ char *PostFixToInfix(char *exp)
 		return res;
 }
 
-char *InfixToPrefix(char *exp)
-{
+char *InfixToPrefix(char *exp) {
 		int len = strlen(exp);
 		char *res = (char *)malloc(len + 1);
 		int ri = 0;
-		for (int i = 0; i < len / 2; i++) {
-				char tmp = exp[i];
-				exp[i] = exp[len - i - 1];
-				exp[len - i - 1] = tmp;
-		}
+		exp = strrev(exp);
 		for (int i = 0; i < len; i++) {
 				if (exp[i] == '(')
 						exp[i] = ')';
@@ -88,24 +81,13 @@ char *InfixToPrefix(char *exp)
 		}
 
 		char *postfix = InfixToPostfix(exp);
-		for (int i = 0; i < len / 2; i++) {
-				char tmp = postfix[i];
-				postfix[i] = postfix[len - i - 1];
-				postfix[len - i - 1] = tmp;
-		}
-		for (int i = 0; i < len; i++) {
-				if (postfix[i] == '(')
-						postfix[i] = ')';
-				else if (postfix[i] == ')')
-						postfix[i] = '(';
-		}
+		postfix = strrev(postfix);
 		strcpy(res, postfix);
 		free(postfix);
 		return res;
 }
 
-char *PrefixToInfix(char *exp)
-{
+char *PrefixToInfix(char *exp) {
 		int len = strlen(exp);
 		char *res = (char *)malloc(len + 1);
 		char tmp[128][128] = { 0 };
@@ -113,14 +95,13 @@ char *PrefixToInfix(char *exp)
 
 		for (int i = len - 1; i >= 0; i--) {
 				char c = exp[i];
-				if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')) {
+				if (isalnum(c)) {
 						ti++;
 						tmp[ti][0] = c;
 						tmp[ti][1] = '\0';
 				} else {
-						char op1[128];
+						char op1[128], op2[128];
 						strcpy(op1, tmp[ti--]);
-						char op2[128];
 						strcpy(op2, tmp[ti--]);
 						sprintf(tmp[++ti], "(%s%c%s)", op1, c, op2);
 				}
@@ -130,33 +111,22 @@ char *PrefixToInfix(char *exp)
 		return res;
 }
 
-int main()
-{
+int main() {
 		char buffer[101];
 
 		printf("Enter Infix expression: ");
 		scanf("\n%[^\n]100s", buffer);
 
-		char *res = InfixToPostfix(buffer);
-		printf("Postfix: %s\n", res);
-		free(res);
-
-		res = InfixToPrefix(buffer);
-		printf("Prefix: %s\n", res);
-		free(res);
+		printf("Postfix: %s\n", InfixToPostfix(buffer));
+		printf("Prefix: %s\n", InfixToPrefix(buffer));
 
 		printf("Enter Postfix Expression: ");
 		scanf("\n%[^\n]100s", buffer);
-
-		res = PostFixToInfix(buffer);
-		printf("Infix: %s\n", res);
-		free(res);
+		printf("Infix: %s\n", PostFixToInfix(buffer));
 
 		printf("Enter Prefix Expression: ");
 		scanf("\n%[^\n]100s", buffer);
+		printf("Infix: %s\n", PrefixToInfix(buffer));
 
-		res = PrefixToInfix(buffer);
-		printf("Infix: %s\n", res);
-		free(res);
 		return 0;
 }

@@ -4,7 +4,7 @@ SOURCES = $(wildcard $(SOURCE_DIR)/*.c)
 BINS = $(patsubst  %.c,%, $(patsubst $(SOURCE_DIR)/%,$(BUILD_DIR)/%, $(SOURCES)))
 
 
-CC := gcc
+CC := $(CC)
 
 FLAG_BASE := -std=c17 -pipe
 LINKER_FLAGS := -lm
@@ -31,6 +31,7 @@ clean:
 
 
 format: $(SOURCES)
+	@echo "Formating with clang-format"
 	@for file in $(SOURCES) ; \
 	do \
 		clang-format -i $$file ; \
@@ -47,5 +48,3 @@ git-push: format
 $(BUILD_DIR)/%: $(SOURCE_DIR)/%.c 
 	@echo CC $@
 	@$(CC) $(CFLAGS) $< -o $@
-
-

@@ -9,8 +9,7 @@ static size_t size = 0;
 
 #define is_empty() (size == 0 || stack == NULL)
 
-void create()
-{
+void create() {
 		printf("Enter Starting stack size: ");
 		scanf("\n%lu", &size);
 		stack = malloc(sizeof(int) * size);
@@ -20,8 +19,7 @@ void create()
 		}
 }
 
-void push(int val)
-{
+void push(int val) {
 		if (stack == NULL) {
 				printf("Stack not initialized...");
 				return;
@@ -31,8 +29,7 @@ void push(int val)
 		stack[size - 1] = val;
 }
 
-int pop()
-{
+int pop() {
 		if (is_empty()) { return 0; }
 		int ret = stack[size - 1];
 		size--;
@@ -40,14 +37,12 @@ int pop()
 		return ret;
 }
 
-int peek()
-{
+int peek() {
 		if (is_empty()) { return 0; }
 		return stack[size - 1];
 }
 
-void show()
-{
+void show() {
 		if (is_empty()) {
 				printf("Stack not initialized...\n");
 		} else {
@@ -58,15 +53,13 @@ void show()
 		}
 }
 
-void flush_stdin()
-{
+void flush_stdin() {
 		int c;
 		while ((c = getchar()) != '\n' && c != EOF)
 				;
 }
 
-int main()
-{
+int main() {
 		int v;
 		create();
 		printf("Enter value to push: ");

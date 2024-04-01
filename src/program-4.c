@@ -6,15 +6,13 @@
 
 int operand[128], top1 = -1, operator[128], top2 = -1;
 
-int precedence(char op)
-{
+int precedence(char op) {
 		if (op == '+' || op == '-') return 1;
 		if (op == '*' || op == '/') return 2;
 		return 0;
 }
 
-void process()
-{
+void process() {
 		int y = operand[top1--];
 		int x = operand[top1--];
 		int op = operator[top2--];
@@ -34,8 +32,7 @@ void process()
 		}
 }
 
-int evaluateInfixExpression(char *exp)
-{
+int evaluateInfixExpression(char *exp) {
 		for (int i = 0; exp[i] != '\0'; i++) {
 				while (exp[i] == ' ') i++;
 				char token = exp[i];
@@ -78,8 +75,7 @@ int evaluateInfixExpression(char *exp)
 		}
 }
 
-int evaluatePostFixExpression(char *exp)
-{
+int evaluatePostFixExpression(char *exp) {
 		for (int i = 0; exp[i] != '\0'; i++) {
 				int token = exp[i];
 				if (token >= '0' && token <= '9') {
@@ -100,8 +96,7 @@ int evaluatePostFixExpression(char *exp)
 		return operand[top1--];
 }
 
-int evaluatePrefixExpression(char *exp)
-{
+int evaluatePrefixExpression(char *exp) {
 		for (int i = strlen(exp) - 1; i >= 0; i--) {
 				int token = exp[i];
 				if (token >= '0' && token <= '9') {
@@ -122,8 +117,7 @@ int evaluatePrefixExpression(char *exp)
 		return operand[top1--];
 }
 
-int main()
-{
+int main() {
 		char *infix = "9*(4-1)";
 		char *prefix = "*-941";
 		char *postfix = "419-*";
