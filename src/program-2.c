@@ -11,10 +11,10 @@ static size_t size = 0;
 
 void create() {
 	printf("Enter Starting stack size: ");
-	scanf("\n%lu", &size);
+	scanf("\n%llu", &size);
 	stack = malloc(sizeof(int) * size);
 	for (size_t i = 0; i < size; i++) {
-		printf("Element [%lu]: ", i);
+		printf("Element [%llu]: ", i);
 		scanf("\n%d", &stack[i]);
 	}
 }
