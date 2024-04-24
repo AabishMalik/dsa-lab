@@ -41,25 +41,27 @@ char *InfixToPostfix(char *exp) {
 
 char *PostFixToInfix(char *exp) {
 	int len = strlen(exp), ti = -1;
-	char *res = (char *)malloc(len + 1), tmp[128][128] = { 0 };
+	char tmp[128][128] = { 0 };
 
 	for (int i = 0; i < len; i++) {
 		char c = exp[i];
 		if (isalnum(c)) {
 			sprintf(tmp[++ti], "%c", c);
 		} else {
-			char *op2 = tmp[ti--];
-			char *op1 = tmp[ti--];
-			sprintf(tmp[++ti], "(%s%c%s)", op2, c, op2);
+			char op2[128];
+			char op1[128];
+			strcpy(op2, tmp[ti--]);
+			strcpy(op1, tmp[ti--]);
+			sprintf(tmp[++ti], "(%s%c%s)", op2, c, op1);
 		}
 	}
+	char *res = (char *)malloc(strlen(tmp[0]) + 1);
 	strcpy(res, tmp[0]);
 	return res;
 }
 
 char *InfixToPrefix(char *exp) {
 	int len = strlen(exp), ri = 0;
-	char *res = (char *)malloc(len + 1);
 	exp = strrev(exp);
 	for (int i = 0; i < len; i++) {
 		if (exp[i] == '(')
@@ -70,9 +72,7 @@ char *InfixToPrefix(char *exp) {
 
 	char *postfix = InfixToPostfix(exp);
 	postfix = strrev(postfix);
-	strcpy(res, postfix);
-	free(postfix);
-	return res;
+	return postfix;
 }
 
 char *PrefixToInfix(char *exp) {
@@ -84,8 +84,10 @@ char *PrefixToInfix(char *exp) {
 		if (isalnum(c)) {
 			sprintf(tmp[++ti], "%c", c);
 		} else {
-			char *op1 = tmp[ti--];
-			char *op2 = tmp[ti--];
+			char op2[128];
+			char op1[128];
+			strcpy(op1, tmp[ti--]);
+			strcpy(op2, tmp[ti--]);
 			sprintf(tmp[++ti], "(%s%c%s)", op1, c, op2);
 		}
 	}
