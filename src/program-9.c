@@ -1,6 +1,6 @@
-// program 7
+// program 9
 //
-// Basic implementation of a singly linked list
+// Basic implementation of a circular linked list
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,23 +14,23 @@ node_t *head = NULL;
 node_t *tail = NULL;
 size_t length = 0;
 
-
 void Insert(size_t idx, int data) {
 	node_t *node = (node_t *)malloc(sizeof(node_t));
 	node->data = data;
 	node->next = NULL;
-	
-	if(length == 0){
+
+	if (length == 0) {
 		head = node;
 		tail = node;
-
+		tail->next = head;
 	} else if (idx == 0) {
 		node->next = head;
 		head = node;
-
+		tail->next = head;
 	} else if (idx >= length) {
 		tail->next = node;
 		tail = node;
+		tail->next = head;
 	} else {
 		node_t *current = head;
 		for (size_t i = 0; i < idx - 1; i++) {
@@ -42,58 +42,62 @@ void Insert(size_t idx, int data) {
 	length++;
 }
 
-void Display() {
-	node_t *current = head;
-	while (current != NULL) {
-		printf("%d%s", current->data, (current->next != NULL) ? "->" : "\n");
-		current = current->next;
-	}
-}
-
-int Search(int data) {
+void Search(int data) {
 	node_t *current = head;
 	int idx = 0;
 	while (current != NULL) {
 		if (current->data == data) {
-			return idx;
+			printf("Found %d at index %d\n", data, idx);
+			return;
 		}
 		current = current->next;
 		idx++;
+		if (current == head) {
+			break;
+		}
 	}
-	return -1;
+	printf("%d not found\n", data);
+}
+
+void Display() {
+	node_t *current = head;
+	while (current != NULL) {
+		printf("%d%s", current->data, (current->next != head) ? "->" : "\n");
+		current = current->next;
+		if (current == head) {
+			break;
+		}
+	}
 }
 
 void Delete(size_t idx) {
+	if (length == 0) return;
 	node_t *current = head;
 	if (idx == 0) {
-		head = current->next;
-		free(current);
-		length--;
+		head = head->next;
+		tail->next = head;
 	} else {
-		for (size_t i = 0; i < idx - 1 && current != NULL ; i++) {
+		for (size_t i = 0; i < idx - 1; i++) {
 			current = current->next;
 		}
-		if(current != NULL){
-			node_t *temp = current->next;
-			current->next = temp->next;
-			free(temp);
-			length--;
-		}
+		node_t *temp = current->next;
+		current->next = temp->next;
+		free(temp);
 	}
+	length--;
 }
-
 
 
 int main() {
 	Insert(0, 1);
 	Insert(1, 2);
-	Insert(2, 3);
-	Insert(0, 4);
+	Insert(2, 4);
+	Insert(3, 7);
 	Display();
-	printf("Index of 3: %d\n", Search(3));
-	Delete(1);
-	printf("After deleting index 1\n");
+	Search(2);
+	Delete(5);
 	Display();
-
+	Search(2);
 	return 0;
 }
+
