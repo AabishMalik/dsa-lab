@@ -10,8 +10,7 @@ typedef struct Node {
 	struct Node *next;
 } node_t;
 
-node_t *head = NULL;
-node_t *tail = NULL;
+node_t *head = NULL, *tail = NULL;
 size_t length = 0;
 
 

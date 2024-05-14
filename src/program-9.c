@@ -2,6 +2,7 @@
 //
 // Basic implementation of a circular linked list
 
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -10,8 +11,7 @@ typedef struct Node {
 	struct Node *next;
 } node_t;
 
-node_t *head = NULL;
-node_t *tail = NULL;
+node_t *head = NULL, *tail = NULL;
 size_t length = 0;
 
 void Insert(size_t idx, int data) {
@@ -20,8 +20,7 @@ void Insert(size_t idx, int data) {
 	node->next = NULL;
 
 	if (length == 0) {
-		head = node;
-		tail = node;
+		head = tail = node;
 		tail->next = head;
 	} else if (idx == 0) {
 		node->next = head;
@@ -100,4 +99,3 @@ int main() {
 	Search(2);
 	return 0;
 }
-

@@ -90,10 +90,7 @@ void Delete(size_t idx){
 }
 
 int main(){
-	Insert(0, 1);
-	Insert(1, 9);
-	Insert(3, 10);
-	Insert(1, 5);
+	Insert(0, 1); Insert(1, 9); Insert(3, 10); Insert(1, 5);
 	Display();
 	Search(5);
 	Search(11);
@@ -101,5 +98,3 @@ int main(){
 	Display();
 	return 0;
 }
-
-
