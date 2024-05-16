@@ -53,12 +53,11 @@ void Display() {
 	node_t *tmp = head;
 	if (tmp == NULL) {
 		printf("Queue is empty\n");
-		return;
-	}
-
-	while (head != NULL) {
-		printf("%d ", tmp->data);
-	}
+	} else
+		while (tmp != NULL) {
+			printf("%d ", tmp->data);
+			tmp = tmp->next;
+		}
 	putchar('\n');
 }
 
