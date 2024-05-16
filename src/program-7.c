@@ -13,13 +13,12 @@ typedef struct Node {
 node_t *head = NULL, *tail = NULL;
 size_t length = 0;
 
-
 void Insert(size_t idx, int data) {
 	node_t *node = (node_t *)malloc(sizeof(node_t));
 	node->data = data;
 	node->next = NULL;
-	
-	if(length == 0){
+
+	if (length == 0) {
 		head = node;
 		tail = node;
 
@@ -69,10 +68,10 @@ void Delete(size_t idx) {
 		free(current);
 		length--;
 	} else {
-		for (size_t i = 0; i < idx - 1 && current != NULL ; i++) {
+		for (size_t i = 0; i < idx - 1 && current != NULL; i++) {
 			current = current->next;
 		}
-		if(current != NULL){
+		if (current != NULL) {
 			node_t *temp = current->next;
 			current->next = temp->next;
 			free(temp);
@@ -80,8 +79,6 @@ void Delete(size_t idx) {
 		}
 	}
 }
-
-
 
 int main() {
 	Insert(0, 1);
