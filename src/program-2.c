@@ -11,10 +11,10 @@ static size_t size = 0;
 
 void create() {
 	printf("Enter Starting stack size: ");
-	scanf("\n%llu", &size);
+	scanf("\n%lu", &size);
 	stack = malloc(sizeof(int) * size);
 	for (size_t i = 0; i < size; i++) {
-		printf("Element [%llu]: ", i);
+		printf("Element [%lu]: ", i);
 		scanf("\n%d", &stack[i]);
 	}
 }
@@ -59,7 +59,8 @@ void show() {
 
 void flush_stdin() {
 	int c;
-	while ((c = getchar()) != '\n' && c != EOF);
+	while ((c = getchar()) != '\n' && c != EOF)
+		;
 }
 
 int main() {
