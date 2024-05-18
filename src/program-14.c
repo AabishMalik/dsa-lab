@@ -39,8 +39,11 @@ tnode *Delete(tnode *node, int data) {
 	} else if (data > node->data) {
 		node->right = Delete(node->right, data);
 	} else {
-		if (node->left == NULL) return node->right;
-		if (node->right == NULL) return node->left;
+		if (node->left == NULL || node->right == NULL) {
+			tnode *tmp = (node->left == NULL) ? node->right : node->left;
+			free(node);
+			return tmp;
+		}
 
 		tnode *tmp = node->right;
 		while (tmp->left != NULL) tmp = tmp->left;
